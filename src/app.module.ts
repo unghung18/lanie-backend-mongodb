@@ -13,8 +13,8 @@ import { UsersController } from './users/users.controller';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://127.0.0.1/nest'),
     ConfigModule.forRoot(),
+    MongooseModule.forRoot(process.env.MONGODB_URL),
     AuthModule,
     ColorsModule,
     ProductsModule,
