@@ -56,7 +56,11 @@ export class AuthService {
         });
       }
     } catch (error) {
-      return new InternalServerErrorException();
+      return res.status(500).json({
+        error: {
+          message: "Internal Server Error"
+        }
+      })
     }
   }
 
