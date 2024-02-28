@@ -6,6 +6,8 @@ export declare class ProductsController {
     constructor(productsService: ProductsService);
     create(body: CreateProductDto, res: Response): Promise<any>;
     findAll(query: any, res: Response): Promise<any>;
+    getLatestProducts(res: Response): Promise<any>;
+    getSaleProducts(query: any, res: Response): Promise<any>;
     findOne(id: string, res: Response): Promise<any>;
     update(id: string, body: CreateProductDto, res: Response): Promise<any>;
     remove(id: string, res: Response): Promise<any>;

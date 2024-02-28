@@ -26,6 +26,12 @@ let ProductsController = class ProductsController {
     findAll(query, res) {
         return this.productsService.findAll(query, res);
     }
+    getLatestProducts(res) {
+        return this.productsService.getLatestProducts(res);
+    }
+    getSaleProducts(query, res) {
+        return this.productsService.getSaleProducts(query, res);
+    }
     findOne(id, res) {
         return this.productsService.findOne(id, res);
     }
@@ -56,6 +62,21 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)("/latest-products"),
+    __param(0, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], ProductsController.prototype, "getLatestProducts", null);
+__decorate([
+    (0, common_1.Get)("/sale"),
+    __param(0, (0, common_1.Query)()),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], ProductsController.prototype, "getSaleProducts", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),

@@ -25,10 +25,13 @@ export class ProductsService {
       const productsData = await this.productModel.find(
         {
           $and: [
-            { title: { $regex: query.search ? query.search : "", $options: 'ui' } },
+            { tags: { $regex: query.search ? query.search : "", $options: 'ui' } },
+            { tags: { $regex: query.category ? query.category : "", $options: 'ui' } },
+            query.size ? { sizes: { $all: [query.size] } } : {},
+            { price: { $gte: query.price ? query.price.split(":")[0] : 0, $lte: query.price ? query.price.split(":")[1] : 10000000 } }
           ]
         }
-      ).populate('colors');
+      ).populate("colors");
       return res.status(201).json({
         data: productsData,
         message: "Retrieved Successfully"
@@ -118,10 +121,30 @@ export class ProductsService {
           { tags: { $regex: query.category ? query.category : "" } },
           query.color ? { colors: { $all: [query.color] } } : {},
           query.size ? { sizes: { $all: [query.size] } } : {},
-          { price: { $gte: query.price ? query.price.split(":")[0] : 0, $lte: query.price ? query.price.split(":")[1] : 10000000 } }
         ]
       })
 
+      return res.status(201).json({
+        data: productsData,
+        message: "Retrieved Successfully"
+      });
+    } catch (error) {
+      return new InternalServerErrorException();
+    }
+  }
+  async getSaleProducts(query, res) {
+    try {
+      const productsData = await this.productModel.find(
+        {
+          $and: [
+            { sale: { $nin: [0] } },
+            { tags: { $regex: query.search ? query.search : "", $options: 'ui' } },
+            { tags: { $regex: query.category ? query.category : "", $options: 'ui' } },
+            query.size ? { sizes: { $all: [query.size] } } : {},
+            { price: { $gte: query.price ? query.price.split(":")[0] : 0, $lte: query.price ? query.price.split(":")[1] : 10000000 } }
+          ]
+        }
+      ).populate("colors");
       return res.status(201).json({
         data: productsData,
         message: "Retrieved Successfully"

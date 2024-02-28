@@ -34,4 +34,5 @@ export declare class ProductsService {
     remove(id: string, res: any): Promise<any>;
     getLatestProducts(res: any): Promise<any>;
     searchProducts(query: any, res: any): Promise<any>;
+    getSaleProducts(query: any, res: any): Promise<any>;
 }

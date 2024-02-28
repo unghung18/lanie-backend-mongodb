@@ -60,7 +60,11 @@ let AuthService = class AuthService {
             }
         }
         catch (error) {
-            return new common_1.InternalServerErrorException();
+            return res.status(500).json({
+                error: {
+                    message: "Internal Server Error"
+                }
+            });
         }
     }
     async signup(body, res) {

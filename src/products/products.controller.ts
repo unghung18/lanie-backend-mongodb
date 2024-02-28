@@ -17,6 +17,16 @@ export class ProductsController {
     return this.productsService.findAll(query, res);
   }
 
+  @Get("/latest-products")
+  getLatestProducts(@Res() res: Response) {
+    return this.productsService.getLatestProducts(res);
+  }
+
+  @Get("/sale")
+  getSaleProducts(@Query() query, @Res() res: Response) {
+    return this.productsService.getSaleProducts(query, res);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string, @Res() res: Response) {
     return this.productsService.findOne(id, res);
@@ -36,4 +46,6 @@ export class ProductsController {
   searchProducts(@Query() query, @Res() res: Response) {
     return this.productsService.searchProducts(query, res);
   }
+
+
 }
