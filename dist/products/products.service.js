@@ -39,11 +39,11 @@ let ProductsService = class ProductsService {
             const productsData = await this.productModel.find({
                 $and: [
                     { tags: { $regex: query.search ? query.search : "", $options: 'ui' } },
-                    { tags: { $regex: query.category ? query.category : "", $options: 'ui' } },
+                    { category: { $regex: query.category ? query.category : "", $options: 'ui' } },
                     query.size ? { sizes: { $all: [{ $elemMatch: { name: { $regex: query.size ? query.size : "", $options: 'ui' } } }] } } : {},
                     { price: { $gte: query.price ? query.price.split(":")[0] : 0, $lte: query.price ? query.price.split(":")[1] : 10000000 } }
                 ]
-            }).populate("colors");
+            }).populate("colors").limit(query.limit ? query.limit : 12);
             return res.status(201).json({
                 data: productsData,
                 message: "Retrieved Successfully"
