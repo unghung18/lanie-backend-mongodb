@@ -11,6 +11,9 @@ export class Product {
     title: string;
 
     @Prop({ required: true })
+    category: string;
+
+    @Prop({ required: true })
     price: number;
 
     @Prop({ required: true })
@@ -26,13 +29,16 @@ export class Product {
     sale: number;
 
     @Prop({ required: true })
-    sizes: string[]
+    sizes: {
+        name: string,
+        quantity: number
+    }[]
 
     @Prop({ required: true, type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Color' }] })
     colors: Color[];
 
     @Prop({ required: true })
-    quantity: number;
+    totalQuantity: number;
 
     @Prop({ default: Date.now })
     createdAt: Date;

@@ -27,7 +27,7 @@ export class ProductsService {
           $and: [
             { tags: { $regex: query.search ? query.search : "", $options: 'ui' } },
             { tags: { $regex: query.category ? query.category : "", $options: 'ui' } },
-            query.size ? { sizes: { $all: [query.size] } } : {},
+            query.size ? { sizes: { $all: [{ $elemMatch: { name: { $regex: query.size ? query.size : "", $options: 'ui' } } }] } } : {},
             { price: { $gte: query.price ? query.price.split(":")[0] : 0, $lte: query.price ? query.price.split(":")[1] : 10000000 } }
           ]
         }

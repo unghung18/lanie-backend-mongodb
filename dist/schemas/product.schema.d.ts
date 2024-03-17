@@ -28,14 +28,18 @@ import { Color } from './color.schema';
 export type ProductDocument = HydratedDocument<Product>;
 export declare class Product {
     title: string;
+    category: string;
     price: number;
     description: string;
     tags: string[];
     images: string[];
     sale: number;
-    sizes: string[];
+    sizes: {
+        name: string;
+        quantity: number;
+    }[];
     colors: Color[];
-    quantity: number;
+    totalQuantity: number;
     createdAt: Date;
     updatedAt: Date;
 }

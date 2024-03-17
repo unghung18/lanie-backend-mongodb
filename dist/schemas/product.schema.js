@@ -21,6 +21,10 @@ __decorate([
 ], Product.prototype, "title", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], Product.prototype, "category", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", Number)
 ], Product.prototype, "price", void 0);
 __decorate([
@@ -50,7 +54,7 @@ __decorate([
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", Number)
-], Product.prototype, "quantity", void 0);
+], Product.prototype, "totalQuantity", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ default: Date.now }),
     __metadata("design:type", Date)

@@ -8,6 +8,10 @@ export class CreateProductDto {
 
     @IsNotEmpty()
     @IsDefined({ message: "This field is required." })
+    category: string;
+
+    @IsNotEmpty()
+    @IsDefined({ message: "This field is required." })
     price: number;
 
     @IsNotEmpty()
@@ -28,7 +32,10 @@ export class CreateProductDto {
 
     @IsNotEmpty()
     @IsDefined({ message: "This field is required." })
-    sizes: string[]
+    sizes: {
+        name: string,
+        quantity: number
+    }[]
 
     @IsNotEmpty()
     @IsDefined({ message: "This field is required." })
@@ -36,6 +43,6 @@ export class CreateProductDto {
 
     @IsNotEmpty()
     @IsDefined({ message: "This field is required." })
-    quantity: number;
+    totalQuantity: number;
 }
 
