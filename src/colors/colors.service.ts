@@ -27,7 +27,7 @@ export class ColorsService {
           { name: { $regex: query.search ? query.search : "", $options: 'ui' } },
         ]
       });
-      return res.status(201).json({
+      return res.status(200).json({
         data: colorsData,
         message: "Retrieved successfully"
       });

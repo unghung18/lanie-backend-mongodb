@@ -44,7 +44,7 @@ let ProductsService = class ProductsService {
                     { price: { $gte: query.price ? query.price.split(":")[0] : 0, $lte: query.price ? query.price.split(":")[1] : 10000000 } }
                 ]
             }).populate("colors").limit(query.limit ? query.limit : 12);
-            return res.status(201).json({
+            return res.status(200).json({
                 data: productsData,
                 message: "Retrieved Successfully"
             });

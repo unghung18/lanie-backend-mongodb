@@ -35,8 +35,14 @@ let CollectionsService = class CollectionsService {
     }
     async findAll(res) {
         try {
-            const collectionsData = await this.collectionModel.find().populate('products');
-            return res.status(201).json({
+            const collectionsData = await this.collectionModel.find().populate({
+                path: 'products',
+                populate: {
+                    path: 'colors',
+                    model: 'Color'
+                }
+            });
+            return res.status(200).json({
                 data: collectionsData,
                 message: "Retrieved successfully"
             });
