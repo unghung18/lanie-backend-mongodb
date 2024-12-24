@@ -12,62 +12,72 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersController = void 0;
+exports.OrdersController = void 0;
 const common_1 = require("@nestjs/common");
-const update_user_dto_1 = require("./dto/update-user.dto");
-const users_service_1 = require("./users.service");
-let UsersController = class UsersController {
-    constructor(usersService) {
-        this.usersService = usersService;
+const create_order_dto_1 = require("./dto/create-order.dto");
+const orders_service_1 = require("./orders.service");
+let OrdersController = class OrdersController {
+    constructor(ordersService) {
+        this.ordersService = ordersService;
     }
-    findAll(res) {
-        return this.usersService.findAll(res);
+    create(body, res) {
+        return this.ordersService.create(body, res);
     }
-    findOne(id, res) {
-        return this.usersService.findOne(id, res);
+    findAll(query, res) {
+        return this.ordersService.findAll(query, res);
+    }
+    findOne(id) {
+        return this.ordersService.findOne(+id);
     }
     update(id, body, res) {
-        return this.usersService.update(id, body, res);
+        return this.ordersService.update(id, body, res);
     }
-    remove(id, res) {
-        return this.usersService.remove(id, res);
+    remove(id) {
+        return this.ordersService.remove(+id);
     }
 };
-exports.UsersController = UsersController;
+exports.OrdersController = OrdersController;
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_order_dto_1.CreateOrderDto, Object]),
+    __metadata("design:returntype", void 0)
+], OrdersController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
-    __param(0, (0, common_1.Res)()),
+    __param(0, (0, common_1.Query)()),
+    __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
-], UsersController.prototype, "findAll", null);
+], OrdersController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
-], UsersController.prototype, "findOne", null);
+], OrdersController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __param(2, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_user_dto_1.UpdateUserDto, Object]),
+    __metadata("design:paramtypes", [String, create_order_dto_1.CreateOrderDto, Object]),
     __metadata("design:returntype", void 0)
-], UsersController.prototype, "update", null);
+], OrdersController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
-], UsersController.prototype, "remove", null);
-exports.UsersController = UsersController = __decorate([
-    (0, common_1.Controller)('api/users'),
-    __metadata("design:paramtypes", [users_service_1.UsersService])
-], UsersController);
-//# sourceMappingURL=users.controller.js.map
+], OrdersController.prototype, "remove", null);
+exports.OrdersController = OrdersController = __decorate([
+    (0, common_1.Controller)('api/orders'),
+    __metadata("design:paramtypes", [orders_service_1.OrdersService])
+], OrdersController);
+//# sourceMappingURL=orders.controller.js.map

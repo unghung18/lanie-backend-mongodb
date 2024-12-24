@@ -1,8 +1,7 @@
-import { Controller, Get, Body, Put, Param, Delete, Res, Req } from '@nestjs/common';
-import { UsersService } from './users.service';
+import { Body, Controller, Delete, Get, Param, Put, Res } from '@nestjs/common';
 import { Response } from 'express';
-import { UserIdRequest } from 'src/logger.middleware';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UsersService } from './users.service';
 
 @Controller('api/users')
 export class UsersController {
@@ -27,6 +26,4 @@ export class UsersController {
   remove(@Param('id') id: string, @Res() res: Response) {
     return this.usersService.remove(id, res);
   }
-
-
 }

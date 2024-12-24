@@ -1,15 +1,15 @@
-import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
-import { ConfigModule } from '@nestjs/config';
-import { ColorsModule } from './colors/colors.module';
-import { ProductsModule } from './products/products.module';
 import { CollectionsModule } from './collections/collections.module';
+import { ColorsModule } from './colors/colors.module';
 import { LoggerMiddleware } from './logger.middleware';
+import { OrdersModule } from './orders/orders.module';
+import { ProductsModule } from './products/products.module';
 import { UsersModule } from './users/users.module';
-import { UsersController } from './users/users.controller';
 
 @Module({
   imports: [
@@ -19,7 +19,8 @@ import { UsersController } from './users/users.controller';
     ColorsModule,
     ProductsModule,
     CollectionsModule,
-    UsersModule],
+    UsersModule,
+    OrdersModule],
   controllers: [AppController],
   providers: [AppService],
 })
@@ -28,6 +29,6 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(LoggerMiddleware)
-      .forRoutes({ path: 'api/auth/get-profile', method: RequestMethod.GET }, UsersController);
+      .forRoutes({ path: 'api/auth/get-profile', method: RequestMethod.GET });
   }
 }

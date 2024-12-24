@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsDefined } from "class-validator";
+import { IsDefined, IsNotEmpty } from "class-validator";
 
 export class CreateProductDto {
 
