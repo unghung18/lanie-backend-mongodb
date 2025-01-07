@@ -49,8 +49,28 @@ let OrdersService = class OrdersService {
             return new common_1.InternalServerErrorException();
         }
     }
-    findOne(id) {
-        return `This action returns a #${id} order`;
+    async findOne(id, res) {
+        try {
+            const isValid = mongoose_2.default.Types.ObjectId.isValid(id);
+            if (!isValid) {
+                return res.status(404).json({
+                    error: {
+                        message: "Not found"
+                    }
+                });
+            }
+            const productData = await this.orderModel.findOne({ _id: id }).populate({
+                path: 'products.product',
+                model: 'Product'
+            });
+            return res.status(200).json({
+                data: productData,
+                message: "Retrieved Successfully"
+            });
+        }
+        catch (error) {
+            return new common_1.InternalServerErrorException();
+        }
     }
     async update(id, body, res) {
         try {

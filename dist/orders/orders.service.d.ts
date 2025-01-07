@@ -29,7 +29,7 @@ export declare class OrdersService {
     constructor(orderModel: Model<Order>);
     create(body: any, res: any): Promise<any>;
     findAll(query: any, res: any): Promise<any>;
-    findOne(id: number): string;
+    findOne(id: string, res: any): Promise<any>;
     update(id: string, body: any, res: any): Promise<any>;
     remove(id: number): string;
 }

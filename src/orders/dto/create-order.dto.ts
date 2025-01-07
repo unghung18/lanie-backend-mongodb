@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsDefined, IsEnum } from "class-validator";
+import { IsDefined, IsEnum, IsNotEmpty } from "class-validator";
 
 export enum OrderStatus {
     PENDING = "PENDING",

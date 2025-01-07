@@ -1,6 +1,6 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { Order } from 'src/schemas/order.schema';
 
 @Injectable()
@@ -35,8 +35,28 @@ export class OrdersService {
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} order`;
+  async findOne(id: string, res) {
+    try {
+      const isValid = mongoose.Types.ObjectId.isValid(id);
+      if (!isValid) {
+        return res.status(404).json({
+          error: {
+            message: "Not found"
+          }
+        })
+      }
+      const productData = await this.orderModel.findOne({ _id: id }).populate({
+        path: 'products.product',
+        model: 'Product'
+      });
+      
+      return res.status(200).json({
+        data: productData,
+        message: "Retrieved Successfully"
+      });
+    } catch (error) {
+      return new InternalServerErrorException();
+    }
   }
 
   async update(id: string, body, res) {
