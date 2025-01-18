@@ -25,7 +25,7 @@ export class OrdersService {
       const orderData = await this.orderModel.find().populate({
         path: 'products.product',
         model: 'Product'
-      });
+      }).sort({ order_date: -1 }).exec();
       return res.status(200).json({
         data: orderData,
         message: "Retrieved successfully"
